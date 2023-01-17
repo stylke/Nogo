@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/res">
+        <file>music/placechess.wav</file>
+        <file>music/bgm.mp3</file>
+    </qresource>
+</RCC>

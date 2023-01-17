@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1376</width>
+    <height>992</height>
+   </rect>
+  </property>
+  <property name="mouseTracking">
+   <bool>true</bool>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <property name="mouseTracking">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1376</width>
+     <height>29</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menu">
+    <property name="title">
+     <string>新游戏</string>
+    </property>
+    <addaction name="actionPVP"/>
+    <addaction name="actionPVE"/>
+   </widget>
+   <widget class="QMenu" name="menu_2">
+    <property name="title">
+     <string>存/读盘</string>
+    </property>
+    <addaction name="actionSave"/>
+    <addaction name="actionrestore_last_saved_board"/>
+   </widget>
+   <widget class="QMenu" name="menu_3">
+    <property name="title">
+     <string>退出</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>帮助</string>
+    </property>
+    <addaction name="actionShowGameRules"/>
+    <addaction name="actionShowGameInfo"/>
+   </widget>
+   <widget class="QMenu" name="menu_5">
+    <property name="title">
+     <string>技能</string>
+    </property>
+    <addaction name="actionShowLosingPoints"/>
+    <addaction name="actionRetract"/>
+   </widget>
+   <widget class="QMenu" name="menu_7">
+    <property name="title">
+     <string>设置</string>
+    </property>
+    <addaction name="actionSettings"/>
+   </widget>
+   <addaction name="menu"/>
+   <addaction name="menu_2"/>
+   <addaction name="menu_5"/>
+   <addaction name="menu_4"/>
+   <addaction name="menu_7"/>
+   <addaction name="menu_3"/>
+  </widget>
+  <action name="actionPVP">
+   <property name="text">
+    <string>PVP</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionPVE">
+   <property name="text">
+    <string>PVE</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="text">
+    <string>保存当前状态</string>
+   </property>
+   <property name="toolTip">
+    <string>保存当前状态</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionrestore_last_saved_board">
+   <property name="text">
+    <string>恢复上次状态</string>
+   </property>
+   <property name="toolTip">
+    <string>恢复上次状态</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+R</string>
+   </property>
+  </action>
+  <action name="actionQuit">
+   <property name="text">
+    <string>退出游戏</string>
+   </property>
+   <property name="toolTip">
+    <string>退出游戏</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionShowGameRules">
+   <property name="text">
+    <string>不围棋规则</string>
+   </property>
+   <property name="toolTip">
+    <string>不围棋规则</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+W</string>
+   </property>
+  </action>
+  <action name="actionRetract">
+   <property name="text">
+    <string>悔棋</string>
+   </property>
+   <property name="toolTip">
+    <string>悔棋</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Z</string>
+   </property>
+  </action>
+  <action name="actionShowLosingPoints">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>显示禁手</string>
+   </property>
+   <property name="toolTip">
+    <string>显示禁手</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionShowGameInfo">
+   <property name="text">
+    <string>操作说明</string>
+   </property>
+   <property name="toolTip">
+    <string>操作说明</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="text">
+    <string>自定义设置</string>
+   </property>
+   <property name="toolTip">
+    <string>自定义设置</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>actionQuit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>687</x>
+     <y>495</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+</ui>
