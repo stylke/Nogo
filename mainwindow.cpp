@@ -249,7 +249,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 
             if(game->getState() == GameOver) return;
 
-            EvaluateValue ev = game->miniMax(-1000,1000,1,3,AIPlay);
+            //EvaluateValue ev = game->miniMax(-1000,1000,1,3,AIPlay);
+            EvaluateValue ev = game->MCTS(AIPlay);
             //qDebug() << '(' << ev.lx << ',' << ev.ly << ')' << "   " << ev.value;
             if(ev.lx == -1){
                 //如果AI分析后传出来的点为(-1,-1),说明AI已无路可走，即玩家获胜
