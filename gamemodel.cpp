@@ -156,13 +156,13 @@ void GameModel::onWin(int player)
 
 int GameModel::evaluateBoard(Player AIPlay)
 {
-    int blackFobbidden = 0; //黑棋不能下的点数
-    int whiteFobbidden = 0; //白棋不能下的点数
+    int blackForbidden = 0; //黑棋不能下的点数
+    int whiteForbidden = 0; //白棋不能下的点数
     for(int i = 1;i <= LINE_NUM;i++){
         for(int j = 1;j <= LINE_NUM;j++){
             if(board[i][j] != 0) continue; //只有棋盘空位才可落子
-            if(isAbleToPlaceChess(i,j,1) == false) blackFobbidden++;
-            if(isAbleToPlaceChess(i,j,2) == false) whiteFobbidden++;
+            if(isAbleToPlaceChess(i,j,1) == false) blackForbidden++;
+            if(isAbleToPlaceChess(i,j,2) == false) whiteForbidden++;
         }
     }
 
@@ -170,8 +170,8 @@ int GameModel::evaluateBoard(Player AIPlay)
     //qDebug() << blackFobbidden - whiteFobbidden;
 
     //保证返回值越大，对AI越有利
-    if(AIPlay == White) return blackFobbidden-whiteFobbidden;
-    else return whiteFobbidden - blackFobbidden;
+    if(AIPlay == White) return blackForbidden-whiteForbidden;
+    else return whiteForbidden - blackForbidden;
 }
 
 bool GameModel::isAbleToPlaceChess(int lx, int ly, int player)
@@ -314,7 +314,7 @@ EvaluateValue GameModel::MCTS(Player AIPlay)
         if((end_time - start_time)*1.0 / CLOCKS_PER_SEC > MCTS_TIME_LIMIT) break; //当消耗时间大于阈值时，停止模拟
         Node * node = root->treePolicy(root);
         if(node == nullptr) break; //如果treePolicy返回的是nullptr，说明模拟初始结点已经到达终局，停止模拟
-        int reward = node->defaultPolicy(node,AIPlay);
+        double reward = node->defaultPolicy(node,AIPlay);
         node->backUp(node,reward);
 
         //记录、调试用
@@ -341,7 +341,8 @@ EvaluateValue GameModel::MCTS(Player AIPlay)
     }
 
     ev.value = best_child->Q*1.0/best_child->N;
-    qDebug() << "AI预测胜率：" << ev.value;
+    qDebug() << "AI评估值：" << ev.value <<  "   " << best_child->Q << "/" << best_child->N << " " << root->Q << "/" << root->N;
+
     root->deleteMalloc(root); //结束前，删除结点树
     return ev;
 }

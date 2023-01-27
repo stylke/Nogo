@@ -30,7 +30,7 @@ const int LINE_DIST = 50; //棋盘格线之间的距离
 const int CHESS_DIAM = 30; //棋子的直径
 const int DOT_DIAM = 10; //提示点的直径
 const int SELECTED_DIAM = 30; //触发提示点的范围直径
-const double MCTS_TIME_LIMIT = 1.95; //MCTS搜索限制时间
+const double MCTS_TIME_LIMIT = 0.95; //MCTS搜索限制时间
 
 struct EvaluateValue{
     int lx; //落子点横坐标

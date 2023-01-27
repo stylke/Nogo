@@ -12,13 +12,32 @@ void Node::deleteMalloc(Node *node)
     delete node;
 }
 
+double Node::quickEvaluate(Node *node,int AIPLay)
+{
+    int blackForbidden = 0;
+    int whiteForbidden = 0;
+    int player = node->player;
+    for(int i = 1;i <= LINE_NUM;i++){
+        for(int j = 1;j <= LINE_NUM;j++){
+            node->player = 1;
+            if(!isAvailable(node,Point{i,j})) blackForbidden++;
+            node->player = 2;
+            if(!isAvailable(node,Point{i,j})) whiteForbidden++;
+        }
+    }
+    node->player = player;
+    if(AIPLay == 1) return whiteForbidden - blackForbidden;
+    else return blackForbidden - whiteForbidden;
+}
+
 bool Node::isAllExpanded(Node *node)
 {
     return node->available_points.empty();
 }
 
-int Node::defaultPolicy(Node *node,int AIPlay)
+double Node::defaultPolicy(Node *node,int AIPlay)
 {
+    /*
     Node * temp = new Node;
     //temp = node;  //不能这样写！！！！！这样temp和node指向的是同一块地址，改变temp也就改变了node
     temp->player = node->player;
@@ -45,9 +64,11 @@ int Node::defaultPolicy(Node *node,int AIPlay)
     }
     delete temp;
     return reward;
+    */
+    return quickEvaluate(node,AIPlay);
 }
 
-void Node::backUp(Node *node, int reward)
+void Node::backUp(Node *node, double reward)
 {
     if(node == nullptr) return;
     node->N ++;
@@ -188,13 +209,13 @@ Node *Node::expand(Node *node,Point point)
 Node *Node::bestChild(Node *node,double c)
 {
     Node * best_child = nullptr;
-    double best_point = -2e20;
+    double best_score = -2e20;
     for(int i = 0;i < node->children.size();i++){
         Node * child = node->children[i];
-        double point = child->Q*1.0/child->N + c * sqrt(2*log(node->N)/child->N);
-        if(point > best_point){
+        double score = child->Q*1.0/child->N + c * sqrt(2*log(node->N)/child->N);
+        if(score > best_score){
             best_child = child;
-            best_point = point;
+            best_score = score;
         }
     }
     return best_child;
