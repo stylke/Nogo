@@ -13,7 +13,7 @@ v2.2版，
  - 新增局势评估功能，以折线图形式呈现。横轴代表步数，纵轴代表两种棋子不能下的点数之差。
 
 ---
-###nogo_for_botzone
+### nogo_for_botzone
 在[botzone](https://www.botzone.org.cn/)平台上创建bot时用的代码，可供测试本项目算法在botzone平台的表现，如果是想参考算法代码的，不要参考该文件里的（这个文件纯粹是为了让它在botzone上能用就行）。 在botzone上创建bot时，直接复制文件夹中的main.cpp即可，编译器选G++ 7.2.0，一定要勾选使用简单交互。
 对于想修改main.cpp的,建议：
  - 要修改MCTS限制时间，修改第8行的值即可
