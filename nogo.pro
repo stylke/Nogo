@@ -3,6 +3,7 @@ QT       += core gui
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 QT       += multimedia
+QT       += charts
 
 RC_ICONS = nogo.ico
 
@@ -23,6 +24,7 @@ SOURCES += \
     ai.cpp \
     dialogsettings.cpp \
     gamemodel.cpp \
+    linechart.cpp \
     main.cpp \
     mainwindow.cpp
 
@@ -30,10 +32,12 @@ HEADERS += \
     ai.h \
     dialogsettings.h \
     gamemodel.h \
+    linechart.h \
     mainwindow.h
 
 FORMS += \
     dialogsettings.ui \
+    linechart.ui \
     mainwindow.ui
 
 # Default rules for deployment.

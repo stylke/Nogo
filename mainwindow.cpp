@@ -79,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent)
     playlist->setCurrentIndex(0);
     player->play();
 
+    lineChart = new LineChart;
+
     connect(timer,SIGNAL(timeout()),this,SLOT(on_timeOut()));
 }
 
@@ -247,6 +249,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             remainingTime = TIME_LIMIT;
             labelTimer->setText(QString::asprintf("    剩余时间:%d秒",remainingTime));
 
+            values[stepCount] = game->evaluateBoard(AIPlay);
+
             if(game->getState() == GameOver) return;
 
             EvaluateValue ev;
@@ -274,6 +278,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
 
             timer->start();
 
+            values[stepCount] = game->evaluateBoard(AIPlay);
+
             isSaved = false;
 
             qDebug() << game->evaluateBoard(AIPlay);
@@ -297,6 +303,8 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
             //交换player
             if(game->getPlayer() == Black) game->changePlayer(White);
             else game->changePlayer(Black);
+
+            values[stepCount] = game->evaluateBoard(Black);
 
             isSaved = false;
         }
@@ -408,6 +416,7 @@ void MainWindow::on_actionPVE_triggered()
         stepCount = 1;
         steps[stepCount][0] = latestx;
         steps[stepCount][1] = latesty;
+        values[stepCount] = 0;
         update();
         game->updateQi(1,1,Black);
 
@@ -745,4 +754,19 @@ void MainWindow::on_actionSettings_triggered()
     }
 
     timer->start();
+}
+
+void MainWindow::on_actionShowEvaluation_triggered()
+{
+    /*
+     注意，此处不能这样写：
+        LineChart chart;
+        chart->show();
+     否则窗口闪一下就消失了。原因是show不是阻塞函数，当on_actionShowEvaluation_trigged执行完毕后，
+     在函数内创建的LineChart就被销毁了
+     为了防止被销毁，此处采用创建指针的办法，不过不能delete，存在内存泄露问题
+    */
+
+    lineChart->loadData(stepCount,values);
+    lineChart->show();
 }

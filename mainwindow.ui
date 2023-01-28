@@ -64,6 +64,7 @@
     </property>
     <addaction name="actionShowLosingPoints"/>
     <addaction name="actionRetract"/>
+    <addaction name="actionShowEvaluation"/>
    </widget>
    <widget class="QMenu" name="menu_7">
     <property name="title">
@@ -183,6 +184,17 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionShowEvaluation">
+   <property name="text">
+    <string>局势评估</string>
+   </property>
+   <property name="toolTip">
+    <string>局势评估</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
    </property>
   </action>
  </widget>

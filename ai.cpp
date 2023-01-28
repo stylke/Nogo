@@ -14,21 +14,39 @@ void Node::deleteMalloc(Node *node)
 
 double Node::quickEvaluate(Node *node,int AIPLay)
 {
-    int blackForbidden = 0;
-    int whiteForbidden = 0;
+    int blackAvaliable = 0;
+    int whiteAvalialbe = 0;
     int player = node->player;
     for(int i = 1;i <= LINE_NUM;i++){
         for(int j = 1;j <= LINE_NUM;j++){
             node->player = 1;
-            if(!isAvailable(node,Point{i,j})) blackForbidden++;
+            if(isAvailable(node,Point{i,j})) blackAvaliable++;
             node->player = 2;
-            if(!isAvailable(node,Point{i,j})) whiteForbidden++;
+            if(isAvailable(node,Point{i,j})) whiteAvalialbe++;
         }
     }
     node->player = player;
-    if(AIPLay == 1) return whiteForbidden - blackForbidden;
-    else return blackForbidden - whiteForbidden;
+    if(AIPLay == 1) return (blackAvaliable - whiteAvalialbe) * 1.0 / ((blackAvaliable + whiteAvalialbe)/5+1);
+    else return (whiteAvalialbe - blackAvaliable) * 1.0 / ((blackAvaliable + whiteAvalialbe)/5+1);
 }
+
+//double Node::quickEvaluate(Node *node,int AIPLay)
+//{
+//    int blackForbidden = 0;
+//    int whiteForbidden = 0;
+//    int player = node->player;
+//    for(int i = 1;i <= LINE_NUM;i++){
+//        for(int j = 1;j <= LINE_NUM;j++){
+//            node->player = 1;
+//            if(!isAvailable(node,Point{i,j})) blackForbidden++;
+//            node->player = 2;
+//            if(!isAvailable(node,Point{i,j})) whiteForbidden++;
+//        }
+//    }
+//    node->player = player;
+//    if(AIPLay == 1) return whiteForbidden - blackForbidden;
+//    else return blackForbidden - whiteForbidden;
+//}
 
 bool Node::isAllExpanded(Node *node)
 {

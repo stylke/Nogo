@@ -8,6 +8,7 @@
 #include <QMediaPlayer>
 #include <QMediaPlaylist>
 #include "gamemodel.h"
+#include "linechart.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,6 +29,7 @@ private:
     int latesty; //最近一步子的列号
     int stepCount; //记录当前步数
     int steps[500][2]; //记录每一步走法，steps[i][0],[i][1]分别表示第i步落子的行号、列号
+    double values[500]; //记录每一步走后，相应棋局的评估分
     bool isSaved; //记录当前棋盘状态是否保存
     int remainingTime; //记录剩余时间
     Player AIPlay; //记录AI代表的棋色
@@ -44,6 +46,8 @@ private:
 
     QMediaPlayer * player;
     QMediaPlaylist * playlist;
+
+    LineChart * lineChart;
 
 public:
     MainWindow(QWidget *parent = nullptr);
@@ -79,6 +83,8 @@ private slots:
     void on_timeOut(); //用于手动连接的槽函数，响应计时器发出的timeout信号
 
     void on_actionSettings_triggered();
+
+    void on_actionShowEvaluation_triggered();
 
 private:
     Ui::MainWindow *ui;
