@@ -12,3 +12,12 @@ v2.2版，
  - 修改了quickEvaluate算法：记x为ai能下的点数，y为玩家能下的点数，则返回值为 $(x-y)/[(x+y)/5+1]$。 可减少前期贪心所占比重。
  - 新增局势评估功能，以折线图形式呈现。横轴代表步数，纵轴代表两种棋子不能下的点数之差。
 
+---
+###nogo_for_botzone
+在[botzone](https://www.botzone.org.cn/)平台上创建bot时用的代码，可供测试本项目算法在botzone平台的表现，如果是想参考算法代码的，不要参考该文件里的（这个文件纯粹是为了让它在botzone上能用就行）。 在botzone上创建bot时，直接复制文件夹中的main.cpp即可，编译器选G++ 7.2.0，一定要勾选使用简单交互。
+对于想修改main.cpp的,建议：
+ - 要修改MCTS限制时间，修改第8行的值即可
+ - 要从MCTS算法切换到minimax算法，注释掉73、77行，去掉72、76行的注释即可
+ - 要修改MCTS算法中结点的Q值计算的，关注defaultPolicy函数和quickEvaluate函数即可
+ - 要改变UCB公式(在bestChild函数中)中常数c的，修改treePolicy函数中调用bestChild时的第二个参数即可
+ - 要改变minimax搜索深度的，修改72、76行调用miniMax的第4个参数即可(建议搜索深度为2或3)
